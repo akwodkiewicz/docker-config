@@ -4,31 +4,29 @@ services:
     build:
       context: ./backend
       dockerfile: Dockerfile
-    ports:
-      - "5001:5000"
     volumes:
       - "./backend/__init__.py:/__init__.py"
       - "./backend/src:/src"
     depends_on:
       - database
 
-  # frontend:
-  #   build:
-  #     context: ./frontend
-  #     dockerfile: Dockerfile
-  #   volumes:
-  #     - "./frontend/src:/usr/src/app/src"
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    volumes:
+      - "./frontend/src:/usr/src/app/src"
 
-  # app:
-  #   image: nginx:latest
-  #   ports:
-  #     - "4200:80"
-  #   volumes:
-  #     - "./nginx-config/nginx.conf:/etc/nginx/nginx.conf:ro"
-  #     - "./nginx-config/conf.d:/etc/nginx/conf.d:ro"
-  #   depends_on:
-  #     - backend
-  #     - frontend
+  app:
+    image: nginx:latest
+    ports:
+      - "4200:80"
+    volumes:
+      - "./nginx-config/nginx.conf:/etc/nginx/nginx.conf:ro"
+      - "./nginx-config/conf.d:/etc/nginx/conf.d:ro"
+    depends_on:
+      - backend
+      - frontend
 
   database:
     image: mongo
