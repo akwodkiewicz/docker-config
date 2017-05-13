@@ -5,8 +5,8 @@ services:
       context: ./backend
       dockerfile: Dockerfile
     volumes:
-      - "./backend/__init__.py:/__init__.py"
-      - "./backend/src:/src"
+      - "./backend/run.py:/run.py"
+      - "./backend/app:/app"
     depends_on:
       - database
 
