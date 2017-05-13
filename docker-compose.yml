@@ -30,3 +30,8 @@ services:
 
   database:
     image: mongo
+    volumes:
+      - data-volume:/data/db
+
+volumes:
+  data-volume:
